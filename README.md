@@ -33,3 +33,14 @@ Visuals:
     - Education
     - Median income
 - Nice to have: neighborhood level data/area layer
+- Nice to have: zip code level data/area layer
+
+Workflow:
+========
+Katie will utilize prior experience with UCB data and Google Geocode to combine
+Google coordinates with UCB data and upload them to a single CSV file that will
+then be pushed to a MongoDB database.
+
+From Mongo we will utilize Flask to create a website structure.
+
+Charlie has a heatmap about Heritage trees that can be repurposed for this site.
