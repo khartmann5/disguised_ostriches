@@ -39,8 +39,12 @@ Workflow:
 ========
 Katie will utilize prior experience with UCB data and Google Geocode to combine
 Google coordinates with UCB data and upload them to a single CSV file that will
-then be pushed to a MongoDB database.
+then be pushed to a MongoDB database. She will manage the API endpoint and
+configure the data so we can utilize the data.
 
 From Mongo we will utilize Flask to create a website structure.
 
 Charlie has a heatmap about Heritage trees that can be repurposed for this site.
+He will also manage the Flask framework creation. 
+
+Lauren will create visualizations and manage the front end.
