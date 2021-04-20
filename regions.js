@@ -15,12 +15,14 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 }).addTo(myMap);
 
 // Load in GeoJson data
-var geoData = "Neighborhoods_(Regions).geojson";
+// var geoData = "Neighborhoods_(Regions).geojson";
+
+const queryURL = "https://opendata.arcgis.com/datasets/9f50a605cf4945259b983fa35c993fe9_125.geojson"
 
 // TODO:
 
 // Grab data with d3
-d3.json(geoData).then(data => {
+d3.json(queryURL).then(data => {
 
 console.log(data)
 
@@ -52,7 +54,7 @@ L.geoJson(data, {
       }
     });
   layer.bindPopup(
-    `<h1>${feature.properties.NAME}</h1>`
+    `<h4>${feature.properties.NAME}</h4>`
   );
   }
 }).addTo(myMap);
