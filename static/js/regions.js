@@ -1,5 +1,5 @@
 // Creating map object
-var myMap = L.map("map", {
+var regionMap = L.map("regionmap", {
   center: [45.53, -122.6754],
   zoom: 11
 });
@@ -12,10 +12,10 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
   zoomOffset: -1,
   id: "mapbox/streets-v11",
   accessToken: API_KEY
-}).addTo(myMap);
+}).addTo(regionMap);
 
 // Load in GeoJson data
-var geoData = "Neighborhoods_(Regions).geojson";
+var geoData = "https://opendata.arcgis.com/datasets/9f50a605cf4945259b983fa35c993fe9_125.geojson";
 
 // TODO:
 
@@ -48,12 +48,12 @@ L.geoJson(data, {
         });
       },
       click: function(event) {
-        myMap.fitBounds(event.target.getBounds());
+        regionMap.fitBounds(event.target.getBounds());
       }
     });
   layer.bindPopup(
     `<h1>${feature.properties.NAME}</h1>`
   );
   }
-}).addTo(myMap);
+}).addTo(regionMap);
 });

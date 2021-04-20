@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Income Choropleth</title>
+    <title>Tree Data</title>
 
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -15,24 +15,26 @@
  crossorigin=""></script>
 
     <!-- Our CSS -->
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
 
   </head>
   <body>
 
     <!-- The div where we will inject our map -->
-    <div id="map"></div>
+    <div id="regionmap"></div>
 
-
+    <div id="heatmap">
+    </div>
     <!-- d3 JavaScript -->
+    <script type="text/javascript" src="static/js/config.js"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
 
-    <!-- Leaflet-Choropleth JavaScript -->
-    <!-- <script type="text/javascript" src="static/js/choropleth.js"></script> -->
+    <!--  JavaScript -->
+    <script type="text/javascript" src="static/js/heatmap.js"></script>
 
     <!-- Our JS -->
-    <script type="text/javascript" src="config.js"></script>
-    <script type="text/javascript" src="regions.js"></script>
-
+    <script type="text/javascript" src="static/js/regions.js"></script>
+    <!-- Leaflet heatmap plugin-->
+    <script type="text/javascript" src="static/js/leaflet-heat.js"></script>
   </body>
 </html>
