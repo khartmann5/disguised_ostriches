@@ -1,7 +1,7 @@
 // Creating map object
 var myMap = L.map("map", {
-  center: [45.5051, -122.6754],
-  zoom: 8
+  center: [45.53, -122.6754],
+  zoom: 11
 });
 
 // Adding tile layer
@@ -23,4 +23,37 @@ var geoData = "Neighborhoods_(Regions).geojson";
 d3.json(geoData).then(data => {
 
 console.log(data)
+
+L.geoJson(data, {
+  style: function(feature) {
+    return{
+      color: "white",
+      fillColor:"lightblue",
+      fillOpacity: 0.5,
+      wieght: 1.5
+    };
+  },
+  onEachFeature: function(feature, layer) {
+    layer.on({
+      mouseover: function(event) {
+        layer = event.target;
+        layer.setStyle({
+          fillOpacity:0.9
+        });
+      },
+      mouseout: function(event) {
+        layer = event.target;
+        layer.setStyle({
+          fillOpacity: 0.5
+        });
+      },
+      click: function(event) {
+        myMap.fitBounds(event.target.getBounds());
+      }
+    });
+  layer.bindPopup(
+    `<h1>${feature.properties.NAME}</h1>`
+  );
+  }
+}).addTo(myMap);
 });
