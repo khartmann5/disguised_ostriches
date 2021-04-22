@@ -14,18 +14,18 @@ def index():
 
     return render_template("index.html")
 
-# Route that will trigger the scrape function
-@app.route("/refresh")
-def refresh():
+# # Route that will trigger the scrape function
+# @app.route("/refresh")
+# def refresh():
 
-    # Run the scrape function
-    costa_data = scrape_costa.scrape_info()
+#     # Run the scrape function
+#     costa_data = scrape_costa.scrape_info()
 
-    # Update the Mongo database using update and upsert=True
-    mongo.portland_census_db.portland_census_db.update({}, costa_data, upsert=True)
+#     # Update the Mongo database using update and upsert=True
+#     mongo.portland_census_db.portland_census_db.update({}, costa_data, upsert=True)
 
-    # Redirect back to home page
-    return redirect(url_for('home'))
+#     # Redirect back to home page
+#     return redirect(url_for('home'))
 
 if __name__ == "__main__":
     app.run(debug=True)
