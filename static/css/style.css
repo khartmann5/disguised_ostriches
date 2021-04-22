@@ -6,13 +6,13 @@ body {
 #regionmap,
 body,
 html {
-  height: 400 px;
+  height: 400px;
 }
 
 #heatmap,
 body,
 html {
-    height: 400 px;
+    height: 400px;
 }
 
 .leaflet-popup-content {
