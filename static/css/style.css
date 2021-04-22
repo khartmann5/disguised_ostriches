@@ -3,16 +3,12 @@ body {
   margin: 0;
 }
 
-#regionmap,
-body,
-html {
-  height: 400 px;
+#regionmap{
+  height: 400px;
 }
 
-#heatmap,
-body,
-html {
-    height: 400 px;
+#heatmap{
+    height: 400px;
 }
 
 .leaflet-popup-content {
