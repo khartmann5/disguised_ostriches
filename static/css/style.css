@@ -3,15 +3,11 @@ body {
   margin: 0;
 }
 
-#regionmap,
-body,
-html {
+#regionmap{
   height: 400px;
 }
 
-#heatmap,
-body,
-html {
+#heatmap{
     height: 400px;
 }
 
