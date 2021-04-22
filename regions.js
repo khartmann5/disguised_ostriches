@@ -14,19 +14,16 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
   accessToken: API_KEY
 }).addTo(myMap);
 
-// Load in GeoJson data
-// var geoData = "Neighborhoods_(Regions).geojson";
-
-const queryURL = "https://opendata.arcgis.com/datasets/9f50a605cf4945259b983fa35c993fe9_125.geojson"
-
-// TODO:
+const neighborhoodURL = "https://opendata.arcgis.com/datasets/9f50a605cf4945259b983fa35c993fe9_125.geojson"
+const treesURL = "https://opendata.arcgis.com/datasets/fd1d618ac3174ad5be730524a4dd778e_26.geojson"
 
 // Grab data with d3
-d3.json(queryURL).then(data => {
+Promise.all([d3.json(neighborhoodURL), d3.json(treesURL)]).then(([neighborhoods, trees]) => {
 
-console.log(data)
+console.log(neighborhoods)
+console.log(trees)
 
-L.geoJson(data, {
+L.geoJson(neighborhoods, {
   style: function(feature) {
     return{
       color: "white",
@@ -56,6 +53,7 @@ L.geoJson(data, {
   layer.bindPopup(
     `<h4>${feature.properties.NAME}</h4>`
   );
+  },
   }
-}).addTo(myMap);
+).addTo(myMap)
 });
