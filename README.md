@@ -1,5 +1,13 @@
 # disguised_ostriches
 
+Table of Contents:
+=======
+- [Summary of Project](#summary-of-project)
+- [How to replicate our code](#how-to-replicate-our-code)
+- [Data Sources](#data-sources)
+- [Visuals](#visuals)
+- [Workflow](#workflow)
+
 Group Members:
 =======
 - Lauren Toothaker
