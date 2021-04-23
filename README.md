@@ -1,5 +1,11 @@
 # disguised_ostriches
 
+Table of Contents: <!-- omit in toc -->
+- [Group Members](#group-members:)
+- [Summary of Project](#summary-of-project:)
+- [Data Sources](#data-sources:)
+- [Visuals](#visuals:)
+
 Group Members:
 =======
 - Lauren Toothaker
