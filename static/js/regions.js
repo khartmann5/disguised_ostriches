@@ -55,5 +55,5 @@ L.geoJson(neighborhoods, {
   );
   },
   }
-).addTo(myMap)
+).addTo(neigh)
 });
