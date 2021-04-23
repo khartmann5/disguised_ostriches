@@ -18,6 +18,13 @@ The goal of this project is to look at Heritage Tree sites in the Portland area
 and compare it with U.S. Census Bureau data on demographics of the site near
 the Heritage tree.
 
+How to replicate our code:
+=======
+In your config.js add these things: const API_KEY as a variable.
+In your config.py add these things: g_key, census_api_key as variables.
+Run ETL_process.ipynb using requirements.txt in Python to query the api's and
+store them to a local MongoDB. 
+
 Data Sources:
 =========
 
@@ -51,6 +58,6 @@ configure the data so we can utilize the data.
 From Mongo we will utilize Flask to create a website structure.
 
 Charlie has a heatmap about Heritage trees that can be repurposed for this site.
-He will also manage the Flask framework creation. 
+He will also manage the Flask framework creation.
 
 Lauren will create visualizations and manage the front end.
