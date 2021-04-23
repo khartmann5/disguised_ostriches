@@ -21,12 +21,25 @@
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
 
   </head>
-  <body>
-
+  <body style="background-color: #2C432E;">
+    <div class = "container-fluid" id = "pageTitle">
+      <h1>Heritage Trees in Portland</h1>
+      <h4 style="font-size: large; font-weight: lighter;color: black;">Lauren Toothaker | Katie Hartmann | Charlie Loveall</h4>
+    </div>
     <!-- The div where we will inject our map -->
     <div id="regionmap"></div>
 
-    <div id="heatmap">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12" id="heatmap">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6" id="chart1">
+        </div>
+        <div class="col-md-6" id="chart2">
+        </div>
+      </div>
     </div>
     <!-- d3 JavaScript -->
     <script type="text/javascript" src="static/js/leaflet-heat.js"></script>
@@ -41,4 +54,8 @@
     <!-- Leaflet heatmap plugin-->
 
   </body>
+  <footer>
+    <h6>Data Sources</h6>
+
+  </footer>
 </html>
