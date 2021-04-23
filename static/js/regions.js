@@ -55,5 +55,7 @@ L.geoJson(neighborhoods, {
   );
   },
   }
-).addTo(neigh)
+
+).addTo(regionMap)
+
 });

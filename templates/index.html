@@ -9,6 +9,9 @@
   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
   crossorigin=""/>
 
+  <!-- bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
   <!-- Make sure you put this AFTER Leaflet's CSS -->
  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
@@ -19,12 +22,25 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
   </head>
-  <body>
-
+  <body style="background-color: #2C432E;">
+    <div class = "container-fluid" id = "pageTitle">
+      <h1>Heritage Trees in Portland</h1>
+      <h4 style="font-size: large; font-weight: lighter;color: black;">Lauren Toothaker | Katie Hartmann | Charlie Loveall</h4>
+    </div>
     <!-- The div where we will inject our map -->
     <div id="regionmap"></div>
 
-    <div id="heatmap">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12" id="heatmap">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6" id="chart1">
+        </div>
+        <div class="col-md-6" id="chart2">
+        </div>
+      </div>
     </div>
     <!-- d3 JavaScript -->
     <script type="text/javascript" src="static/js/leaflet-heat.js"></script>
@@ -43,4 +59,8 @@
     <!-- Leaflet heatmap plugin-->
 
   </body>
+  <footer>
+    <h6>Data Sources</h6>
+
+  </footer>
 </html>
