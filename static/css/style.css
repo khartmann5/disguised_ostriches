@@ -1,18 +1,21 @@
 body {
   padding: 0;
-  margin: 0;
+  margin: 20;
 }
 
-#regionmap,
-body,
-html {
-  height: 400 px;
+#pageTitle {
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  font-size: x-large;
+  text-align: center;
 }
 
-#heatmap,
-body,
-html {
-    height: 400 px;
+/* #regionmap{
+  height: 400px;
+} */
+
+#heatmap{
+    height: 500px
 }
 
 .leaflet-popup-content {
@@ -53,6 +56,8 @@ html {
   float: right;
 }
 
-h1 {
+/* h1 {
   text-align: center;
-}
+} */
+
+
