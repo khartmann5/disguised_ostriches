@@ -10,27 +10,52 @@ body {
   text-align: center;
 }
 
+#orticinfo{
+  padding-top: 15px;
+}
+
+#orticimg {
+  padding-right: 15px;
+}
+
+p{
+  font-family: Arial, Helvetica, sans-serif;
+  color: white
+}
+
+#githublinks,strong #sources,strong{
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+  font-size: small;
+}
+
 /* #regionmap{
   height: 400px;
 } */
 
-#heatmap{
-    height: 500px
+#map{
+    height: 500px;
+    width: 85%;
+    align-content: center;
 }
 
 .leaflet-popup-content {
   text-align: center;
 }
 
-#chart1 #chart2{
-  height:300px;
-  width: 45%
+.row {
+  padding-top: 25px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-/* .col {
-   grid
-
-} */
+#chart1 #chart2{
+  /* height:80%; */
+  width: 45%;
+  /* padding-left: 30px;
+  padding-right: 50px */
+}
 
 /* CSS from the Leaflet-Choropleth documentation */
 .legend {
