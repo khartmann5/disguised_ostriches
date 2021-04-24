@@ -58,7 +58,7 @@ Google coordinates with UCB data and upload them to a single CSV file that will
 then be pushed to a MongoDB database. She will manage the API endpoint and
 configure the data so we can utilize the data.
 
-![Screenshot of MongoDB](images/MongoDB.png)
+![Screenshot of MongoDB](static/images/MongoDB.png)
 
 From Mongo we will utilize Flask to create a website structure.
 

@@ -114,7 +114,7 @@ map.addLayer(markers)
 // .addTo(map)
 });
 
-const map= L.map("heatmap", {
+const map= L.map("map", {
  center: [45.5051, -122.6754],
  zoom: 12,
  layers: tile
