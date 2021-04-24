@@ -1,66 +1,81 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>Tree Data</title>
-<script src="https://d3js.org/d3.v5.min.js"></script>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Tree Data</title>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-  crossorigin=""/>
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
 
   <!-- bootstrap -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+    crossorigin="anonymous"></script>
+  
+
+  <!-- highcharts -->
+  <script src="https://code.highcharts.com/highcharts.js"></script>
 
   <!-- Make sure you put this AFTER Leaflet's CSS -->
- <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
- integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
- crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
 
-    <!-- Our CSS -->
-    <link rel="stylesheet" type="text/css" href="static/css/style.css">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
-  </head>
-  <body style="background-color: #2C432E;">
-    <div class = "container-fluid" id = "pageTitle">
-      <h1>Heritage Trees in Portland</h1>
-      <h4 style="font-size: large; font-weight: lighter;color: black;">Lauren Toothaker | Katie Hartmann | Charlie Loveall</h4>
-    </div>
-    <!-- The div where we will inject our map -->
-    <div id="regionmap"></div>
+  <!-- Our CSS -->
+  <link rel="stylesheet" type="text/css" href="static/css/style.css">
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12" id="heatmap">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6" id="chart1">
-        </div>
-        <div class="col-md-6" id="chart2">
-        </div>
+</head>
+
+<body style="background-color: #2C432E;">
+  <div class="container-fluid" id="pageTitle">
+    <h1>Heritage Trees in Portland</h1>
+    <h4 style="font-size: large; font-weight: lighter;color: black;">Lauren Toothaker | Katie Hartmann | Charlie Loveall
+    </h4>
+  </div>
+  <!-- The div where we will inject our map -->
+  <div id="regionmap"></div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12" id="heatmap">
       </div>
     </div>
-    <!-- d3 JavaScript -->
-    <script type="text/javascript" src="static/js/leaflet-heat.js"></script>
-    <script type="text/javascript" src="static/js/config.js"></script>
+    <div class="row">
+      <div class="col-sm-6" id="chart1">
+      </div>
+      <div class="col-sm-6" id="chart2">
+      </div>
+    </div>
+  </div>
+  <!-- d3 JavaScript -->
+  <script type="text/javascript" src="static/js/leaflet-heat.js"></script>
+  <script type="text/javascript" src="static/js/config.js"></script>
 
-    <!-- <script type="text/javascript" src= "static/js/heatmapfile.js"></script> -->
+  <!-- <script type="text/javascript" src= "static/js/heatmapfile.js"></script> -->
 
 
-    <!-- Marker Cluster JS -->
-    <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
+  <!-- Marker Cluster JS -->
+  <script type="text/javascript"
+    src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
 
-    <!--  JavaScript -->
-    <script type="text/javascript" src="static/js/heatmap.js"></script>
-    <!-- Our JS -->
-    <!-- <script type="text/javascript" src="static/js/regions.js"></script> -->
-    <!-- Leaflet heatmap plugin-->
+  <!--  JavaScript -->
+  <script type="text/javascript" src="static/js/heatmap.js"></script>
+  <script type="text/javascript" src="static/js/treedesignations.js"></script>
+  <!-- Our JS -->
+  <!-- <script type="text/javascript" src="static/js/regions.js"></script> -->
+  <!-- Leaflet heatmap plugin-->
 
-  </body>
-  <footer>
-    <h6>Data Sources</h6>
+</body>
+<footer>
+  <h6>Data Sources</h6>
 
-  </footer>
+</footer>
+
 </html>

@@ -22,6 +22,16 @@ body {
   text-align: center;
 }
 
+#chart1 #chart2{
+  height:300px;
+  width: 45%
+}
+
+/* .col {
+   grid
+
+} */
+
 /* CSS from the Leaflet-Choropleth documentation */
 .legend {
   padding: 6px 8px;
