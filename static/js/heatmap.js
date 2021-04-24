@@ -15,26 +15,26 @@ const baseMaps = {
 // }
 
 
+const census= "/api/censusdata/"
 
-
-const url = "https://opendata.arcgis.com/datasets/fd1d618ac3174ad5be730524a4dd778e_26.geojson";
+// const url = "https://opendata.arcgis.com/datasets/fd1d618ac3174ad5be730524a4dd778e_26.geojson";
 // const url= "api/heatmapdata"
-d3.json(url).then(response => {
-
-  console.log(response);
-console.log(response.features[0].properties);
-  const heatArray = [];
-  const markers= L.markerClusterGroup();
-  for (let i = 0; i < response.features.length; i++) {
-    const location = response.features[i].properties;
-    // console.log(location)
-    if (location.LAT) {
-      markers.addLayer(L.marker([location.LAT, location.LON]).bindPopup(`<strong>Notes:</strong>${response.features[i].properties.NOTES}`));
-    }
-}
+// d3.json(url).then(response => {
+//
+//   console.log(response);
+// console.log(response.features[0].properties);
+//   const heatArray = [];
+//   const markers= L.markerClusterGroup();
+//   for (let i = 0; i < response.features.length; i++) {
+//     const location = response.features[i].properties;
+//     // console.log(location)
+//     if (location.LAT) {
+//       markers.addLayer(L.marker([location.LAT, location.LON]).bindPopup(`<strong>Notes:</strong>${response.features[i].properties.NOTES}`));
+//     }
+// }
   // console.log(location);
 // console.log(heatArray);
-map.addLayer(markers)
+// map.addLayer(markers)
 // response.features.forEach(feature => {
 //     const lat = feature.properties.LAT;
 //     const long= feature.properties.LON;
@@ -54,17 +54,30 @@ map.addLayer(markers)
 //       radius: 20,
 //       blur: 25
 //   }).addTo(heatMap);
-});
+// });
 const neighborhoodURL = "https://opendata.arcgis.com/datasets/9f50a605cf4945259b983fa35c993fe9_125.geojson"
 const treesURL = "https://opendata.arcgis.com/datasets/fd1d618ac3174ad5be730524a4dd778e_26.geojson"
 
 // Grab data with d3
 // const neigh=
-Promise.all([d3.json(neighborhoodURL), d3.json(treesURL)]).then(([neighborhoods, trees]) => {
+Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then(([neighborhoods, trees, ucb]) => {
 
 console.log(neighborhoods)
 console.log(trees)
+console.log(ucb);
+console.log(trees.features[0].properties);
 
+const markers= L.markerClusterGroup();
+for (let i = 0; i < trees.features.length; i++) {
+  const location = trees.features[i].properties;
+  // console.log(location)
+  if (location.LAT) {
+    markers.addLayer(L.marker([location.LAT, location.LON]).bindPopup(`<strong>Notes:</strong>${trees.features[i].properties.NOTES}`));
+  }
+}
+// console.log(location);
+// console.log(heatArray);
+map.addLayer(markers)
  L.geoJson(neighborhoods, {
   style: function(feature) {
     return{
