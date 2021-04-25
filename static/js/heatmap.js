@@ -1,3 +1,5 @@
+//=====================
+//start page load with map layer 
 const tile =  L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
   attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
   tileSize: 512,
@@ -10,38 +12,12 @@ const tile =  L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{
 const baseMaps = {
    "Portland Map": tile
  };
-// const neighborhoods = {
+// deprecated try to call using multiple files
+//const neighborhoods = {
 //     "Neighborhoods":
 // }
 
-
-const census= "/api/censusdata/"
-
-// const url = "https://opendata.arcgis.com/datasets/fd1d618ac3174ad5be730524a4dd778e_26.geojson";
-// const url= "api/heatmapdata"
-// d3.json(url).then(response => {
-//
-//   console.log(response);
-// console.log(response.features[0].properties);
-//   const heatArray = [];
-//   const markers= L.markerClusterGroup();
-//   for (let i = 0; i < response.features.length; i++) {
-//     const location = response.features[i].properties;
-//     // console.log(location)
-//     if (location.LAT) {
-//       markers.addLayer(L.marker([location.LAT, location.LON]).bindPopup(`<strong>Notes:</strong>${response.features[i].properties.NOTES}`));
-//     }
-// }
-  // console.log(location);
-// console.log(heatArray);
-// map.addLayer(markers)
-// response.features.forEach(feature => {
-//     const lat = feature.properties.LAT;
-//     const long= feature.properties.LON;
-//     console.log(lat);
-//     console.log(long);
-// }
-// )
+// troubleshooting for CORS error
 // setTimeout(function(){
 //     // can assign to const heat
 //      L.heatLayer(heatArray, {
@@ -49,12 +25,9 @@ const census= "/api/censusdata/"
 //       blur: 15
 //   }).addTo(heatMap)
 // },9500);
-
-// L.heatLayer(heatArray, {
-//       radius: 20,
-//       blur: 25
-//   }).addTo(heatMap);
-// });
+// =====================
+// declare API url links for promise
+const census= "/api/censusdata/"
 const neighborhoodURL = "https://opendata.arcgis.com/datasets/9f50a605cf4945259b983fa35c993fe9_125.geojson"
 const treesURL = "https://opendata.arcgis.com/datasets/fd1d618ac3174ad5be730524a4dd778e_26.geojson"
 
@@ -72,7 +45,12 @@ for (let i = 0; i < trees.features.length; i++) {
   const location = trees.features[i].properties;
   // console.log(location)
   if (location.LAT) {
-    markers.addLayer(L.marker([location.LAT, location.LON]).bindPopup(`<strong>Notes:</strong>${trees.features[i].properties.NOTES}`));
+    markers.addLayer(L.marker([location.LAT, location.LON])
+    .bindPopup(`<br><strong>Year Designated: </strong>${trees.features[i].properties.YEAR_Designated}</br>\
+        <br><strong>Spread: </strong>${trees.features[i].properties.SPREAD} feet</br>\
+        <br><strong>Diameter: </strong>${trees.features[i].properties.DIAMETER} feet</br>\
+        <br><strong>Height: </strong> ${trees.features[i].properties.HEIGHT} feet</br>\
+        <br><strong>Details: </strong>${trees.features[i].properties.NOTES}</br>`));
   }
 }
 // console.log(location);
