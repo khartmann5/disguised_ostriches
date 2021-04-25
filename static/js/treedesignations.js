@@ -1,3 +1,9 @@
+const heritagetrees = "https://opendata.arcgis.com/datasets/fd1d618ac3174ad5be730524a4dd778e_26.geojson"
+
+d3.json(heritagetrees).then(data => {
+    console.log(data.features)
+})
+
 Highcharts.chart('chart1', {
 
     title: {
