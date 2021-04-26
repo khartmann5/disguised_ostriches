@@ -53,6 +53,25 @@ for (let i = 0; i < trees.features.length; i++) {
         <br><strong>Details: </strong>${trees.features[i].properties.NOTES}</br>`));
   }
 }
+
+// Adding Median Income circles to map
+// create a function to choose a different color based on median home value
+function chooseColor(home_value){
+  switch (true){
+    case home_value > 800000: return "#c7ea46";
+    case home_value > 700000: return "#fce205";
+    case home_value > 600000: return "#ffbf00";
+    case home_value > 500000: return "#fda50f";
+    case home_value > 400000: return "#f64a8a";
+    case home_value < 300000: return "#b90f0a";
+  };
+}
+// Create an array containing census data information
+ucb.forEach(data => console.log(data));
+
+
+
+
 // console.log(location);
 // console.log(heatArray);
 map.addLayer(markers)
@@ -97,6 +116,29 @@ const map= L.map("map", {
  zoom: 12,
  layers: tile
 });
+
+// create a legend in the bottom right corner (with the help of my tutor David Pecot)
+var legend = L.control({
+  position: 'bottomright',
+  fillColor: 'white'
+});
+
+legend.onAdd = function(){
+  var div = L.DomUtil.create("div", "info legend");
+  var grades = [800000,700000,600000,500000,400000,300000];
+  var color = ['#c7ea46','#fce205','#ffbf00','#fda50f','#f64a8a','#b90f0a'];
+
+  div.innerHTML += "<div style='font-weight: 600; text-align:center;'>Home Value</div>";
+  for (var i = 0; i < grades.length; i++){
+    div.innerHTML +=
+    "<div style='background: " + color[i] + "; text-align: center; padding: 1; border: 1px solid grey; min-width: 80px;'>"
+    + grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "</div>" : "<</div>");
+  }
+  return div;
+
+}
+
+legend.addTo(map)
 
 // const neighbors = {
 //     "Neighborhoods": neigh
