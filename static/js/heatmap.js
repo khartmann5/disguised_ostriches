@@ -67,10 +67,24 @@ function chooseColor(home_value){
   };
 }
 // Create an array containing census data information
-ucb.forEach(data => console.log(data));
+// ucb.forEach(data => console.log(data));
 
+// // create city circles
+// for (let i = 0; i<medianHome.length; i++) {
+//   const homeValue = home[i];
+//   L.circle(latCensusArray[i],longCensusArray[i], {
+//     fillColor: chooseColor(medianHome[i]),
+//     radius: Math.sqrt(medianHome)*10000,
+//     stroke: true,
+//     weight: 0.5,
+//     color: "black"
+//   })
+// };
 
-
+// const overlayMaps = {
+//   "Tree Markers": markers,
+//   "Home Values": homeValue
+// };
 
 // console.log(location);
 // console.log(heatArray);
@@ -231,6 +245,24 @@ const map= L.map("map", {
  layers: tile
 });
 
+// ===========================
+// create city circles
+for (let i = 0; i < medianHome.length; i++) {
+  const homeValue = medianHome[i];
+  L.circle(latCensusArray[i],longCensusArray[i], {
+    fillColor: chooseColor(medianHome[i]),
+    radius: Math.sqrt(medianHome)*10000,
+    stroke: true,
+    weight: 0.5,
+    color: "black"
+  })
+};
+
+// Create overlay object to hold our overlay layer
+const overlayMaps = {
+  "Tree Markers": markers,
+  "Home Values": homeValue
+};
 
 // create a legend in the bottom right corner (with the help of my tutor David Pecot)
 var legend = L.control({
@@ -259,4 +291,4 @@ legend.addTo(map)
 // const neighbors = {
 //     "Neighborhoods": neigh
 // }
-L.control.layers(baseMaps).addTo(map);
+L.control.layers(baseMaps,overlayMaps,{collapsed: false}).addTo(map);
