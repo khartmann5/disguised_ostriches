@@ -123,8 +123,7 @@ console.log(zip);
 console.log(medianHome);
 Highcharts.chart('chart2', {
     chart: {
-       type: 'scatter',
-       zoomType: 'xy'
+       type: 'column',
    },
 
     title: {
@@ -136,16 +135,16 @@ Highcharts.chart('chart2', {
     },
 
     yAxis: {
+        min: 0,
         title: {
-            text: 'Median Home Value'
+            text: 'Median Home Value ($)'
         }
     },
 
     xAxis: {
-        accessibility: {
-            rangeDescription: 'Zipcode'
-        }
-    },
+      categories: zip,
+      crosshair: true,
+  },
 
     legend: {
         layout: 'vertical',
@@ -153,39 +152,24 @@ Highcharts.chart('chart2', {
         verticalAlign: 'middle'
     },
 
-    plotOptions: {
-            scatter: {
-                marker: {
-                    radius: 5,
-                    states: {
-                        hover: {
-                            enabled: true,
-                            lineColor: 'rgb(100,100,100)'
-                        }
-                    }
-                },
-                states: {
-                    hover: {
-                        marker: {
-                            enabled: false
-                        }
-                    }
-                },
-                tooltip: {
-                    headerFormat: '<b>{series.name}</b><br>',
-                    pointFormat: '{point.x}, ${point.y} '
-                }
-            }
-        },
-
+    tooltip: {
+       headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+       pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+           '<td style="padding:0"><b>${point.y:.1f}</b></td></tr>',
+       footerFormat: '</table>',
+       shared: true,
+       useHTML: true
+   },
+   plotOptions: {
+       column: {
+           pointPadding: 0.2,
+           borderWidth: 0
+       }
+   },
     series: [{
-        name: 'Median Income',
+        name: 'Median Home Value',
         color: 'rgba(223, 83, 83, .5)',
         data: medianHome
-    }, {
-        name: 'Zipcode',
-        color: 'rgba(119, 152, 191, .5)',
-        data: zip
     }],
 
     responsive: {
