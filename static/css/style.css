@@ -23,10 +23,11 @@ p{
   color: white
 }
 
-#githublinks,strong #sources,strong{
+#footerlinks{
   font-family: Arial, Helvetica, sans-serif;
   color: black;
   font-size: small;
+  padding-left: 15px;
 }
 
 /* #regionmap{
@@ -50,7 +51,7 @@ p{
   padding-right: 10px;
 }
 
-#chart1 #chart2{
+#chart1 #chart2 #chart3 #chart4{
   /* height:80%; */
   width: 45%;
   /* padding-left: 30px;
@@ -94,5 +95,3 @@ p{
 /* h1 {
   text-align: center;
 } */
-
-
