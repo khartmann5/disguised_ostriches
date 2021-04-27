@@ -137,6 +137,9 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
   }
   // ==================================
   // High chart plotting
+  // ==================================
+
+  
   console.log(zip);
   console.log(medianHome);
   Highcharts.chart('chart2', {
