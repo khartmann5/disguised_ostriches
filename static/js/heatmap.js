@@ -1,6 +1,7 @@
-//=====================
+//====================
 //start page load with map layer
 const tile =  L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+
   attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
   tileSize: 512,
   maxZoom: 18,
@@ -10,8 +11,8 @@ const tile =  L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{
   accessToken: API_KEY
 });
 const baseMaps = {
-   "Portland Map": tile
- };
+  "Portland Map": tile
+};
 // deprecated try to call using multiple files
 //const neighborhoods = {
 //     "Neighborhoods":
@@ -27,7 +28,7 @@ const baseMaps = {
 // },9500);
 // =====================
 // declare API url links for promise
-const census= "/api/censusdata/"
+const census = "/api/censusdata/"
 const neighborhoodURL = "https://opendata.arcgis.com/datasets/9f50a605cf4945259b983fa35c993fe9_125.geojson"
 const treesURL = "https://opendata.arcgis.com/datasets/fd1d618ac3174ad5be730524a4dd778e_26.geojson"
 
@@ -35,11 +36,11 @@ const treesURL = "https://opendata.arcgis.com/datasets/fd1d618ac3174ad5be730524a
 
 Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then(([neighborhoods, trees, ucb]) => {
 
-console.log(neighborhoods)
-console.log(trees)
-console.log(ucb);
-console.log(trees.features[0].properties);
-
+  console.log(neighborhoods)
+  console.log(trees)
+  console.log(ucb);
+  console.log(trees.features[0].properties);
+  
 const markers= L.markerClusterGroup();
 for (let i = 0; i < trees.features.length; i++) {
   const location = trees.features[i].properties;
@@ -223,12 +224,13 @@ Highcharts.chart('chart2', {
     }
 
 })
+
 });
 
-const map= L.map("map", {
- center: [45.5051, -122.6754],
- zoom: 12,
- layers: tile
+const map = L.map("map", {
+  center: [45.5051, -122.6754],
+  zoom: 12,
+  layers: tile
 });
 
 
