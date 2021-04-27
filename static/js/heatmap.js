@@ -147,8 +147,7 @@ map.addLayer(tile);
   console.log(medianHome);
   Highcharts.chart('chart2', {
     chart: {
-      type: 'scatter',
-      zoomType: 'xy'
+      type: 'column',
     },
 
     title: {
@@ -228,6 +227,73 @@ map.addLayer(tile);
     }
 
   })
+  Highcharts.chart('chart4', {
+    chart: {
+       type: 'column',
+   },
+
+    title: {
+        text: 'U.S. Census Bureau Data for Portland, 2019'
+    },
+
+    subtitle: {
+        text: 'Source: census.gov/data'
+    },
+
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Median Income ($)'
+        }
+    },
+
+    xAxis: {
+      categories: zip,
+      crosshair: true,
+  },
+
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+
+    tooltip: {
+       headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+       pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+           '<td style="padding:0"><b>${point.y:.1f}</b></td></tr>',
+       footerFormat: '</table>',
+       shared: true,
+       useHTML: true
+   },
+   plotOptions: {
+       column: {
+           pointPadding: 0.2,
+           borderWidth: 0
+       }
+   },
+    series: [{
+        name: 'Median Income',
+        color: 'rgba(223, 83, 83, .5)',
+        data: medianIncome
+    }],
+
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
+            }
+        }]
+    }
+
+})
   // ===========================
   // Adding Median Income circles to map
   // create a function to choose a different color based on median home value
