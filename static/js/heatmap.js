@@ -82,7 +82,7 @@ map.addLayer(tile);
       return {
         color: "white",
         fillColor: "lightblue",
-        fillOpacity: 0.5,
+        // fillOpacity: 0.1,
         weight: 1.5
       };
     },
