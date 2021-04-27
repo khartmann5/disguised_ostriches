@@ -40,7 +40,7 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
   console.log(trees)
   console.log(ucb);
   console.log(trees.features[0].properties);
-  
+
 const markers= L.markerClusterGroup();
 for (let i = 0; i < trees.features.length; i++) {
   const location = trees.features[i].properties;
@@ -208,7 +208,73 @@ Highcharts.chart('chart2', {
     }
 
 })
+Highcharts.chart('chart4', {
+    chart: {
+       type: 'column',
+   },
 
+    title: {
+        text: 'U.S. Census Bureau Data for Portland, 2019'
+    },
+
+    subtitle: {
+        text: 'Source: census.gov/data'
+    },
+
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Median Income ($)'
+        }
+    },
+
+    xAxis: {
+      categories: zip,
+      crosshair: true,
+  },
+
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+
+    tooltip: {
+       headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+       pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+           '<td style="padding:0"><b>${point.y:.1f}</b></td></tr>',
+       footerFormat: '</table>',
+       shared: true,
+       useHTML: true
+   },
+   plotOptions: {
+       column: {
+           pointPadding: 0.2,
+           borderWidth: 0
+       }
+   },
+    series: [{
+        name: 'Median Income',
+        color: 'rgba(223, 83, 83, .5)',
+        data: medianIncome
+    }],
+
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
+            }
+        }]
+    }
+
+})
 });
 
 const map = L.map("map", {
