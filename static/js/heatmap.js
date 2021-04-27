@@ -39,7 +39,6 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
   console.log(trees)
   console.log(ucb);
   console.log(trees.features[0].properties);
-
 const markers= L.markerClusterGroup();
 for (let i = 0; i < trees.features.length; i++) {
   const location = trees.features[i].properties;
