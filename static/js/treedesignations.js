@@ -48,7 +48,6 @@ d3.json(heritagetrees).then(trees => {
             crosshair: true,
             title: {
                 text: "Year Designated"
-
             }
         },
         yAxis: {
