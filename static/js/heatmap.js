@@ -1,5 +1,4 @@
 //=====================
-
 //start page load with map layer
 // const tile = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
 //   attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
@@ -13,7 +12,6 @@
 // const baseMaps = {
 //   "Portland Map": tile
 // };
-
 // deprecated try to call using multiple files
 //const neighborhoods = {
 //     "Neighborhoods":
@@ -37,12 +35,10 @@ const treesURL = "https://opendata.arcgis.com/datasets/fd1d618ac3174ad5be730524a
 
 Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then(([neighborhoods, trees, ucb]) => {
 
-
   // console.log(neighborhoods)
   // console.log(trees)
   // console.log(ucb);
   // console.log(trees.features[0].properties);
-
 
   const markers = L.markerClusterGroup();
   for (let i = 0; i < trees.features.length; i++) {
@@ -57,7 +53,6 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
         <br><strong>Details: </strong>${location.NOTES}</br>`));
     }
   }
-
   const map = L.map("map", {
     center: [45.5051, -122.6754],
     zoom: 12,
@@ -79,25 +74,6 @@ const baseMaps = {
 };
 map.addLayer(tile);
 
-
-  // Adding Median Income circles to map
-  // create a function to choose a different color based on median home value
-  function chooseColor(home_value) {
-    switch (true) {
-      case home_value > 800000: return "#c7ea46";
-      case home_value > 700000: return "#fce205";
-      case home_value > 600000: return "#ffbf00";
-      case home_value > 500000: return "#fda50f";
-      case home_value > 400000: return "#f64a8a";
-      case home_value < 300000: return "#b90f0a";
-    };
-  }
-  // Create an array containing census data information
-  ucb.forEach(data => console.log(data));
-
-
-
-
   // console.log(location);
   // console.log(heatArray);
   map.addLayer(markers)
@@ -106,9 +82,7 @@ map.addLayer(tile);
       return {
         color: "white",
         fillColor: "lightblue",
-
         // fillOpacity: 0.1,
-
         weight: 1.5
       };
     },
@@ -164,7 +138,6 @@ map.addLayer(tile);
     longCensusArray.push(ucb[i].Lng)
 
   }
-
   console.log(latCensusArray);
   console.log(longCensusArray);
   // ==================================
@@ -178,8 +151,6 @@ map.addLayer(tile);
       zoomType: 'xy'
     },
 
-
-
     title: {
       text: 'U.S. Census Bureau Data for Portland, 2019'
     },
@@ -189,7 +160,6 @@ map.addLayer(tile);
     },
 
     yAxis: {
-
       title: {
         text: 'Median Home Value'
       }
@@ -201,13 +171,11 @@ map.addLayer(tile);
       }
     },
 
-
     legend: {
       layout: 'vertical',
       align: 'right',
       verticalAlign: 'middle'
     },
-
 
     plotOptions: {
       scatter: {
@@ -234,27 +202,14 @@ map.addLayer(tile);
       }
     },
 
-
-    tooltip: {
-       headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-       pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-           '<td style="padding:0"><b>${point.y:.1f}</b></td></tr>',
-       footerFormat: '</table>',
-       shared: true,
-       useHTML: true
-   },
-   plotOptions: {
-       column: {
-           pointPadding: 0.2,
-           borderWidth: 0
-       }
-   },
     series: [{
-
-        name: 'Median Home Value',
-        color: 'rgba(223, 83, 83, .5)',
-        data: medianHome
-
+      name: 'Median Income',
+      color: 'rgba(223, 83, 83, .5)',
+      data: medianHome
+    }, {
+      name: 'Zipcode',
+      color: 'rgba(119, 152, 191, .5)',
+      data: zip
     }],
 
     responsive: {
@@ -271,7 +226,6 @@ map.addLayer(tile);
         }
       }]
     }
-
 
   })
   // ===========================
@@ -313,161 +267,6 @@ map.addLayer(tile);
     "Home Values": homes
   };
 
-})
-Highcharts.chart('chart4', {
-    chart: {
-       type: 'column',
-   },
-
-
-    title: {
-        text: 'U.S. Census Bureau Data for Portland, 2019'
-    },
-
-    subtitle: {
-        text: 'Source: census.gov/data'
-    },
-
-    yAxis: {
-        min: 0,
-        title: {
-            text: 'Median Income ($)'
-        }
-    },
-
-    xAxis: {
-      categories: zip,
-      crosshair: true,
-  },
-
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle'
-    },
-
-    tooltip: {
-       headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-       pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-           '<td style="padding:0"><b>${point.y:.1f}</b></td></tr>',
-       footerFormat: '</table>',
-       shared: true,
-       useHTML: true
-   },
-   plotOptions: {
-       column: {
-           pointPadding: 0.2,
-           borderWidth: 0
-       }
-   },
-    series: [{
-
-        name: 'Median Income',
-        color: 'rgba(223, 83, 83, .5)',
-        data: medianIncome
-
-    }],
-
-    responsive: {
-      rules: [{
-        condition: {
-          maxWidth: 500
-        },
-        chartOptions: {
-          legend: {
-            layout: 'horizontal',
-            align: 'center',
-            verticalAlign: 'bottom'
-          }
-        }
-      }]
-    }
-
-
-})
-
-  })
-
-  // tree designation years
-  let yearDesignated = []
-
-  for (let i = 0; i < trees.features.length; i++) {
-    const designation = trees.features[i].properties.YEAR_Designated;
-    // console.log(designation)
-
-    if (designation) {
-      yearDesignated.push(designation)
-    }
-  }
-  console.log(yearDesignated)
-
-  let sortedYearDes = yearDesignated.sort((a, b) => a - b);
-  // console.log(sortedYearDes)
-  let counts = {};
-
-  for (var i = 0; i < sortedYearDes.length; i++) {
-    var num = sortedYearDes[i];
-    counts[num] = counts[num] ? counts[num] + 1 : 1;
-  }
-  //   console.log(counts);
-
-  let designationYear = Object.keys(counts);
-  let treeCount = Object.values(counts);
-
-  console.log(designationYear);
-  console.log(treeCount);
-
-  Highcharts.chart('chart1', {
-
-    chart: {
-      type: 'column'
-    },
-    title: {
-      text: 'Heritage Trees Designated by Year'
-    },
-    subtitle: {
-      text: 'Source: Portland Open Data'
-    },
-    xAxis: {
-      categories: designationYear,
-      crosshair: true,
-      title: {
-        text: "Year Designated"
-      }
-    },
-    yAxis: {
-      min: 0,
-      title: {
-        text: 'Number of Trees Designated'
-      }
-    },
-    tooltip: {
-      formatter: function () {
-        return '<strong>' + this.x +
-          '</strong>: <p>' + this.y + '</p>';
-      }
-    },
-    plotOptions: {
-      column: {
-        pointPadding: 0.2,
-        borderWidth: 0
-      }
-    },
-    series: [{
-      showInLegend: false,
-      data: treeCount
-    }]
-  });
-
-});
-
-const map = L.map("map", {
-  center: [45.5051, -122.6754],
-  zoom: 12,
-  layers: tile
-});
-
-
   // const map = L.map("map", {
   //   center: [45.5051, -122.6754],
   //   zoom: 12,
@@ -499,10 +298,3 @@ legend.addTo(map)
 
   L.control.layers(baseMaps, overlayMaps, { collapsed: false }).addTo(map);
 });
-
-
-
-
-
-
-
