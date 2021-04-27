@@ -243,7 +243,7 @@ map.addLayer(tile);
   }
   // create city circles
   const value = []
-  
+
   for (let i = 0; i < medianHome.length; i++) {
     value.push(
       L.circle([latCensusArray[i], longCensusArray[i]], {
@@ -255,9 +255,9 @@ map.addLayer(tile);
     }))
   };
 
-  
-  
-    
+
+
+
   console.log(value);
   const homes = L.layerGroup(value);
   map.addLayer(homes);
