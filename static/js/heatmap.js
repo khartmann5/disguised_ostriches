@@ -202,13 +202,9 @@ map.addLayer(tile);
     },
 
     series: [{
-      name: 'Median Income',
+      name: 'Median Home Value',
       color: 'rgba(223, 83, 83, .5)',
       data: medianHome
-    }, {
-      name: 'Zipcode',
-      color: 'rgba(119, 152, 191, .5)',
-      data: zip
     }],
 
     responsive: {
