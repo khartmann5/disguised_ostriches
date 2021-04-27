@@ -1,17 +1,19 @@
 //=====================
-//start page load with map layer 
-const tile = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-  attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
-  tileSize: 512,
-  maxZoom: 18,
-  zoomOffset: -1,
-  id: "mapbox/light-v10",
-  // layers: [baseMaps, ]
-  accessToken: API_KEY
-});
-const baseMaps = {
-  "Portland Map": tile
-};
+
+//start page load with map layer
+// const tile = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+//   attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+//   tileSize: 512,
+//   maxZoom: 18,
+//   zoomOffset: -1,
+//   id: "mapbox/light-v10",
+//   // layers: [baseMaps, ]
+//   accessToken: API_KEY
+// });
+// const baseMaps = {
+//   "Portland Map": tile
+// };
+
 // deprecated try to call using multiple files
 //const neighborhoods = {
 //     "Neighborhoods":
@@ -35,10 +37,13 @@ const treesURL = "https://opendata.arcgis.com/datasets/fd1d618ac3174ad5be730524a
 
 Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then(([neighborhoods, trees, ucb]) => {
 
-  console.log(neighborhoods)
-  console.log(trees)
-  console.log(ucb);
-  console.log(trees.features[0].properties);
+
+  // console.log(neighborhoods)
+  // console.log(trees)
+  // console.log(ucb);
+  // console.log(trees.features[0].properties);
+
+
   const markers = L.markerClusterGroup();
   for (let i = 0; i < trees.features.length; i++) {
     const location = trees.features[i].properties;
@@ -52,6 +57,28 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
         <br><strong>Details: </strong>${location.NOTES}</br>`));
     }
   }
+
+  const map = L.map("map", {
+    center: [45.5051, -122.6754],
+    zoom: 12,
+    maxZoom: 15
+    // layers: [tile, markers, homes]
+  });
+
+  const tile = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+  attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+  tileSize: 512,
+  maxZoom: 18,
+  zoomOffset: -1,
+  id: "mapbox/light-v10",
+  // layers: [baseMaps, ]
+  accessToken: API_KEY
+});
+const baseMaps = {
+  "Portland Map": tile
+};
+map.addLayer(tile);
+
 
   // Adding Median Income circles to map
   // create a function to choose a different color based on median home value
@@ -79,7 +106,9 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
       return {
         color: "white",
         fillColor: "lightblue",
-        fillOpacity: 0.5,
+
+        // fillOpacity: 0.1,
+
         weight: 1.5
       };
     },
@@ -135,18 +164,21 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
     longCensusArray.push(ucb[i].Lng)
 
   }
+
+  console.log(latCensusArray);
+  console.log(longCensusArray);
   // ==================================
   // High chart plotting
-  // ==================================
 
-  
-  console.log(zip);
+  // console.log(zip);
   console.log(medianHome);
   Highcharts.chart('chart2', {
     chart: {
       type: 'scatter',
       zoomType: 'xy'
     },
+
+
 
     title: {
       text: 'U.S. Census Bureau Data for Portland, 2019'
@@ -157,6 +189,7 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
     },
 
     yAxis: {
+
       title: {
         text: 'Median Home Value'
       }
@@ -168,11 +201,13 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
       }
     },
 
+
     legend: {
       layout: 'vertical',
       align: 'right',
       verticalAlign: 'middle'
     },
+
 
     plotOptions: {
       scatter: {
@@ -199,14 +234,27 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
       }
     },
 
+
+    tooltip: {
+       headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+       pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+           '<td style="padding:0"><b>${point.y:.1f}</b></td></tr>',
+       footerFormat: '</table>',
+       shared: true,
+       useHTML: true
+   },
+   plotOptions: {
+       column: {
+           pointPadding: 0.2,
+           borderWidth: 0
+       }
+   },
     series: [{
-      name: 'Median Income',
-      color: 'rgba(223, 83, 83, .5)',
-      data: medianHome
-    }, {
-      name: 'Zipcode',
-      color: 'rgba(119, 152, 191, .5)',
-      data: zip
+
+        name: 'Median Home Value',
+        color: 'rgba(223, 83, 83, .5)',
+        data: medianHome
+
     }],
 
     responsive: {
@@ -223,6 +271,120 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
         }
       }]
     }
+
+
+  })
+  // ===========================
+  // Adding Median Income circles to map
+  // create a function to choose a different color based on median home value
+  function chooseColor(home_value) {
+    switch (true) {
+      case home_value > 800000: return "#c7ea46";
+      case home_value > 700000: return "#fce205";
+      case home_value > 600000: return "#ffbf00";
+      case home_value > 500000: return "#fda50f";
+      case home_value > 400000: return "#f64a8a";
+      case home_value < 300000: return "#b90f0a";
+    };
+  }
+  // create city circles
+  const value = []
+  
+  for (let i = 0; i < medianHome.length; i++) {
+    value.push(
+      L.circle([latCensusArray[i], longCensusArray[i]], {
+      fillColor: chooseColor(medianHome[i]),
+      radius: Math.sqrt(medianHome[i]),
+      stroke: true,
+      weight: 0.5,
+      color: "black"
+    }))
+  };
+
+  
+  
+    
+  console.log(value);
+  const homes = L.layerGroup(value);
+  map.addLayer(homes);
+  // Create overlay object to hold our overlay layer
+  const overlayMaps = {
+    "Tree Markers": markers,
+    "Home Values": homes
+  };
+
+})
+Highcharts.chart('chart4', {
+    chart: {
+       type: 'column',
+   },
+
+
+    title: {
+        text: 'U.S. Census Bureau Data for Portland, 2019'
+    },
+
+    subtitle: {
+        text: 'Source: census.gov/data'
+    },
+
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Median Income ($)'
+        }
+    },
+
+    xAxis: {
+      categories: zip,
+      crosshair: true,
+  },
+
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+
+    tooltip: {
+       headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+       pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+           '<td style="padding:0"><b>${point.y:.1f}</b></td></tr>',
+       footerFormat: '</table>',
+       shared: true,
+       useHTML: true
+   },
+   plotOptions: {
+       column: {
+           pointPadding: 0.2,
+           borderWidth: 0
+       }
+   },
+    series: [{
+
+        name: 'Median Income',
+        color: 'rgba(223, 83, 83, .5)',
+        data: medianIncome
+
+    }],
+
+    responsive: {
+      rules: [{
+        condition: {
+          maxWidth: 500
+        },
+        chartOptions: {
+          legend: {
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'bottom'
+          }
+        }
+      }]
+    }
+
+
+})
 
   })
 
@@ -296,6 +458,7 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
       data: treeCount
     }]
   });
+
 });
 
 const map = L.map("map", {
@@ -305,7 +468,13 @@ const map = L.map("map", {
 });
 
 
-// create a legend in the bottom right corner (with the help of my tutor David Pecot)
+  // const map = L.map("map", {
+  //   center: [45.5051, -122.6754],
+  //   zoom: 12,
+  //   layers: [tile, markers, homes]
+  // });
+
+  // create a legend in the bottom right corner (with the help of my tutor David Pecot)
 var legend = L.control({
   position: 'bottomright',
   fillColor: 'white'
@@ -328,8 +497,12 @@ legend.onAdd = function () {
 
 legend.addTo(map)
 
+  L.control.layers(baseMaps, overlayMaps, { collapsed: false }).addTo(map);
+});
 
-// const neighbors = {
-//     "Neighborhoods": neigh
-// }
-L.control.layers(baseMaps).addTo(map);
+
+
+
+
+
+
