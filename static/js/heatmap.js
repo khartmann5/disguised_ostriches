@@ -39,6 +39,7 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
   console.log(trees)
   console.log(ucb);
   console.log(trees.features[0].properties);
+
   const markers = L.markerClusterGroup();
   for (let i = 0; i < trees.features.length; i++) {
     const location = trees.features[i].properties;
@@ -141,9 +142,10 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
   console.log(medianHome);
   Highcharts.chart('chart2', {
     chart: {
-      type: 'scatter',
-      zoomType: 'xy'
-    },
+
+       type: 'column',
+   },
+
 
     title: {
       text: 'U.S. Census Bureau Data for Portland, 2019'
@@ -154,16 +156,18 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
     },
 
     yAxis: {
-      title: {
-        text: 'Median Home Value'
-      }
+
+        min: 0,
+        title: {
+            text: 'Median Home Value ($)'
+        }
     },
 
     xAxis: {
-      accessibility: {
-        rangeDescription: 'Zipcode'
-      }
-    },
+      categories: zip,
+      crosshair: true,
+  },
+
 
     legend: {
       layout: 'vertical',
@@ -171,39 +175,95 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
       verticalAlign: 'middle'
     },
 
-    plotOptions: {
-      scatter: {
-        marker: {
-          radius: 5,
-          states: {
-            hover: {
-              enabled: true,
-              lineColor: 'rgb(100,100,100)'
+
+    tooltip: {
+       headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+       pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+           '<td style="padding:0"><b>${point.y:.1f}</b></td></tr>',
+       footerFormat: '</table>',
+       shared: true,
+       useHTML: true
+   },
+   plotOptions: {
+       column: {
+           pointPadding: 0.2,
+           borderWidth: 0
+       }
+   },
+    series: [{
+        name: 'Median Home Value',
+        color: 'rgba(223, 83, 83, .5)',
+        data: medianHome
+    }],
+
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
             }
-          }
-        },
-        states: {
-          hover: {
-            marker: {
-              enabled: false
-            }
-          }
-        },
-        tooltip: {
-          headerFormat: '<b>{series.name}</b><br>',
-          pointFormat: '{point.x}, ${point.y} '
-        }
-      }
+        }]
+    }
+
+})
+Highcharts.chart('chart4', {
+    chart: {
+       type: 'column',
+   },
+
+
+    title: {
+        text: 'U.S. Census Bureau Data for Portland, 2019'
     },
 
+    subtitle: {
+        text: 'Source: census.gov/data'
+    },
+
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Median Income ($)'
+        }
+    },
+
+    xAxis: {
+      categories: zip,
+      crosshair: true,
+  },
+
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+
+    tooltip: {
+       headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+       pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+           '<td style="padding:0"><b>${point.y:.1f}</b></td></tr>',
+       footerFormat: '</table>',
+       shared: true,
+       useHTML: true
+   },
+   plotOptions: {
+       column: {
+           pointPadding: 0.2,
+           borderWidth: 0
+       }
+   },
     series: [{
-      name: 'Median Income',
-      color: 'rgba(223, 83, 83, .5)',
-      data: medianHome
-    }, {
-      name: 'Zipcode',
-      color: 'rgba(119, 152, 191, .5)',
-      data: zip
+
+        name: 'Median Income',
+        color: 'rgba(223, 83, 83, .5)',
+        data: medianIncome
+
     }],
 
     responsive: {
@@ -220,6 +280,9 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
         }
       }]
     }
+
+
+})
 
   })
 
@@ -293,6 +356,7 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
       data: treeCount
     }]
   });
+
 });
 
 const map = L.map("map", {
