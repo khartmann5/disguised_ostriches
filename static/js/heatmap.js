@@ -169,6 +169,7 @@ map.addLayer(tile);
   console.log(longCensusArray);
   // ==================================
   // High chart plotting
+
   // console.log(zip);
   console.log(medianHome);
   Highcharts.chart('chart2', {
