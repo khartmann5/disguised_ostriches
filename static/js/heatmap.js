@@ -39,189 +39,260 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
   console.log(trees)
   console.log(ucb);
   console.log(trees.features[0].properties);
-const markers= L.markerClusterGroup();
-for (let i = 0; i < trees.features.length; i++) {
-  const location = trees.features[i].properties;
-  // console.log(location)
-  if (location.LAT) {
-    markers.addLayer(L.marker([location.LAT, location.LON])
-    .bindPopup(`<br><strong>Year Designated: </strong>${location.YEAR_Designated}</br>\
+  const markers = L.markerClusterGroup();
+  for (let i = 0; i < trees.features.length; i++) {
+    const location = trees.features[i].properties;
+    // console.log(location)
+    if (location.LAT) {
+      markers.addLayer(L.marker([location.LAT, location.LON])
+        .bindPopup(`<br><strong>Year Designated: </strong>${location.YEAR_Designated}</br>\
         <br><strong>Spread: </strong>${location.SPREAD} feet</br>\
         <br><strong>Diameter: </strong>${location.DIAMETER} feet</br>\
         <br><strong>Height: </strong> ${location.HEIGHT} feet</br>\
         <br><strong>Details: </strong>${location.NOTES}</br>`));
+    }
   }
-}
 
-// Adding Median Income circles to map
-// create a function to choose a different color based on median home value
-function chooseColor(home_value){
-  switch (true){
-    case home_value > 800000: return "#c7ea46";
-    case home_value > 700000: return "#fce205";
-    case home_value > 600000: return "#ffbf00";
-    case home_value > 500000: return "#fda50f";
-    case home_value > 400000: return "#f64a8a";
-    case home_value < 300000: return "#b90f0a";
-  };
-}
-// Create an array containing census data information
-ucb.forEach(data => console.log(data));
-
-
-
-
-// console.log(location);
-// console.log(heatArray);
-map.addLayer(markers)
- L.geoJson(neighborhoods, {
-  style: function(feature) {
-    return{
-      color: "white",
-      fillColor:"lightblue",
-      fillOpacity: 0.5,
-      weight: 1.5
+  // Adding Median Income circles to map
+  // create a function to choose a different color based on median home value
+  function chooseColor(home_value) {
+    switch (true) {
+      case home_value > 800000: return "#c7ea46";
+      case home_value > 700000: return "#fce205";
+      case home_value > 600000: return "#ffbf00";
+      case home_value > 500000: return "#fda50f";
+      case home_value > 400000: return "#f64a8a";
+      case home_value < 300000: return "#b90f0a";
     };
-  },
-  onEachFeature: function(feature, layer) {
-    layer.on({
-      mouseover: function(event) {
-        layer = event.target;
-        layer.setStyle({
-          fillOpacity:0.9
-        });
-      },
-      mouseout: function(event) {
-        layer = event.target;
-        layer.setStyle({
-          fillOpacity: 0.5
-        });
-      },
-      click: function(event) {
-        map.fitBounds(event.target.getBounds());
-      }
-    });
-  layer.bindPopup(
-    `<h4>${feature.properties.NAME}</h4>`
-  );
-  },
+  }
+  // Create an array containing census data information
+  ucb.forEach(data => console.log(data));
+
+
+
+
+  // console.log(location);
+  // console.log(heatArray);
+  map.addLayer(markers)
+  L.geoJson(neighborhoods, {
+    style: function (feature) {
+      return {
+        color: "white",
+        fillColor: "lightblue",
+        fillOpacity: 0.5,
+        weight: 1.5
+      };
+    },
+    onEachFeature: function (feature, layer) {
+      layer.on({
+        mouseover: function (event) {
+          layer = event.target;
+          layer.setStyle({
+            fillOpacity: 0.9
+          });
+        },
+        mouseout: function (event) {
+          layer = event.target;
+          layer.setStyle({
+            fillOpacity: 0.5
+          });
+        },
+        click: function (event) {
+          map.fitBounds(event.target.getBounds());
+        }
+      });
+      layer.bindPopup(
+        `<h4>${feature.properties.NAME}</h4>`
+      );
+    },
   }
 
 
-).addTo(map)
-// .addTo(map)
-//empty arrays to push data to
-const zip = [];
-const medianIncome = [];
-const medianAge= [];
-const medianHome= [];
-const population= [];
-const bachelorsRate = [];
-const mastersRate = [];
-const city= [];
-const latCensusArray= [];
-const longCensusArray= [];
+  ).addTo(map)
+  // .addTo(map)
+  //empty arrays to push data to
+  const zip = [];
+  const medianIncome = [];
+  const medianAge = [];
+  const medianHome = [];
+  const population = [];
+  const bachelorsRate = [];
+  const mastersRate = [];
+  const city = [];
+  const latCensusArray = [];
+  const longCensusArray = [];
 
-for (let i = 0; i < ucb.length; i++) {
-        zip.push(ucb[i].Zipcode)
-        medianIncome.push(ucb[i].MedianHouseholdIncome)
-        medianAge.push(ucb[i].MedianAge)
-        medianHome.push(ucb[i].MedianHomeValue)
-        population.push(ucb[i].Population)
-        bachelorsRate.push(ucb[i].BachelorsRate)
-        mastersRate.push(ucb[i].MastersRate)
-        city.push(ucb[i].City)
-        latCensusArray.push(ucb[i].Lat)
-        longCensusArray.push(ucb[i].Lng)
+  for (let i = 0; i < ucb.length; i++) {
+    zip.push(ucb[i].Zipcode)
+    medianIncome.push(ucb[i].MedianHouseholdIncome)
+    medianAge.push(ucb[i].MedianAge)
+    medianHome.push(ucb[i].MedianHomeValue)
+    population.push(ucb[i].Population)
+    bachelorsRate.push(ucb[i].BachelorsRate)
+    mastersRate.push(ucb[i].MastersRate)
+    city.push(ucb[i].City)
+    latCensusArray.push(ucb[i].Lat)
+    longCensusArray.push(ucb[i].Lng)
 
-}
-// ==================================
-// High chart plotting
-console.log(zip);
-console.log(medianHome);
-Highcharts.chart('chart2', {
+  }
+  // ==================================
+  // High chart plotting
+  console.log(zip);
+  console.log(medianHome);
+  Highcharts.chart('chart2', {
     chart: {
-       type: 'scatter',
-       zoomType: 'xy'
-   },
+      type: 'scatter',
+      zoomType: 'xy'
+    },
 
     title: {
-        text: 'U.S. Census Bureau Data for Portland, 2019'
+      text: 'U.S. Census Bureau Data for Portland, 2019'
     },
 
     subtitle: {
-        text: 'Source: census.gov/data'
+      text: 'Source: census.gov/data'
     },
 
     yAxis: {
-        title: {
-            text: 'Median Home Value'
-        }
+      title: {
+        text: 'Median Home Value'
+      }
     },
 
     xAxis: {
-        accessibility: {
-            rangeDescription: 'Zipcode'
-        }
+      accessibility: {
+        rangeDescription: 'Zipcode'
+      }
     },
 
     legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle'
+      layout: 'vertical',
+      align: 'right',
+      verticalAlign: 'middle'
     },
 
     plotOptions: {
-            scatter: {
-                marker: {
-                    radius: 5,
-                    states: {
-                        hover: {
-                            enabled: true,
-                            lineColor: 'rgb(100,100,100)'
-                        }
-                    }
-                },
-                states: {
-                    hover: {
-                        marker: {
-                            enabled: false
-                        }
-                    }
-                },
-                tooltip: {
-                    headerFormat: '<b>{series.name}</b><br>',
-                    pointFormat: '{point.x}, ${point.y} '
-                }
+      scatter: {
+        marker: {
+          radius: 5,
+          states: {
+            hover: {
+              enabled: true,
+              lineColor: 'rgb(100,100,100)'
             }
+          }
         },
+        states: {
+          hover: {
+            marker: {
+              enabled: false
+            }
+          }
+        },
+        tooltip: {
+          headerFormat: '<b>{series.name}</b><br>',
+          pointFormat: '{point.x}, ${point.y} '
+        }
+      }
+    },
 
     series: [{
-        name: 'Median Income',
-        color: 'rgba(223, 83, 83, .5)',
-        data: medianHome
+      name: 'Median Income',
+      color: 'rgba(223, 83, 83, .5)',
+      data: medianHome
     }, {
-        name: 'Zipcode',
-        color: 'rgba(119, 152, 191, .5)',
-        data: zip
+      name: 'Zipcode',
+      color: 'rgba(119, 152, 191, .5)',
+      data: zip
     }],
 
     responsive: {
-        rules: [{
-            condition: {
-                maxWidth: 500
-            },
-            chartOptions: {
-                legend: {
-                    layout: 'horizontal',
-                    align: 'center',
-                    verticalAlign: 'bottom'
-                }
-            }
-        }]
+      rules: [{
+        condition: {
+          maxWidth: 500
+        },
+        chartOptions: {
+          legend: {
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'bottom'
+          }
+        }
+      }]
     }
 
-})
+  })
+
+  // tree designation years
+  let yearDesignated = []
+
+  for (let i = 0; i < trees.features.length; i++) {
+    const designation = trees.features[i].properties.YEAR_Designated;
+    // console.log(designation)
+
+    if (designation) {
+      yearDesignated.push(designation)
+    }
+  }
+  console.log(yearDesignated)
+
+  let sortedYearDes = yearDesignated.sort((a, b) => a - b);
+  // console.log(sortedYearDes)
+  let counts = {};
+
+  for (var i = 0; i < sortedYearDes.length; i++) {
+    var num = sortedYearDes[i];
+    counts[num] = counts[num] ? counts[num] + 1 : 1;
+  }
+  //   console.log(counts);
+
+  let designationYear = Object.keys(counts);
+  let treeCount = Object.values(counts);
+
+  console.log(designationYear);
+  console.log(treeCount);
+
+  Highcharts.chart('chart1', {
+
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: 'Heritage Trees Designated by Year'
+    },
+    subtitle: {
+      text: 'Source: Portland Open Data'
+    },
+    xAxis: {
+      categories: designationYear,
+      crosshair: true,
+      title: {
+        text: "Year Designated"
+      }
+    },
+    yAxis: {
+      min: 0,
+      title: {
+        text: 'Number of Trees Designated'
+      }
+    },
+    tooltip: {
+      formatter: function () {
+        return '<strong>' + this.x +
+          '</strong>: <p>' + this.y + '</p>';
+      }
+    },
+    plotOptions: {
+      column: {
+        pointPadding: 0.2,
+        borderWidth: 0
+      }
+    },
+    series: [{
+      showInLegend: false,
+      data: treeCount
+    }]
+  });
 });
 
 const map = L.map("map", {
@@ -237,16 +308,16 @@ var legend = L.control({
   fillColor: 'white'
 });
 
-legend.onAdd = function(){
+legend.onAdd = function () {
   var div = L.DomUtil.create("div", "info legend");
-  var grades = [800000,700000,600000,500000,400000,300000];
-  var color = ['#c7ea46','#fce205','#ffbf00','#fda50f','#f64a8a','#b90f0a'];
+  var grades = [800000, 700000, 600000, 500000, 400000, 300000];
+  var color = ['#c7ea46', '#fce205', '#ffbf00', '#fda50f', '#f64a8a', '#b90f0a'];
 
   div.innerHTML += "<div style='font-weight: 600; text-align:center;'>Home Value</div>";
-  for (var i = 0; i < grades.length; i++){
+  for (var i = 0; i < grades.length; i++) {
     div.innerHTML +=
-    "<div style='background: " + color[i] + "; text-align: center; padding: 1; border: 1px solid grey; min-width: 80px;'>"
-    + grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "</div>" : "<</div>");
+      "<div style='background: " + color[i] + "; text-align: center; padding: 1; border: 1px solid grey; min-width: 80px;'>"
+      + grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "</div>" : "<</div>");
   }
   return div;
 
