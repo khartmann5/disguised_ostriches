@@ -70,3 +70,8 @@ Lauren will create visualizations and manage the front end.
 Conclusion:
 ========
 ** Add notes about what we learned and what we might do differently if we had more time **
+
+Given more time, we would like to further look into the following:
+- median home values and incomes by zipcode over the same range of years included in the heritage trees dataset
+- identify and execute a means of comparing locations on either neighborhoods or zip codes for a one-to-one comparison
+- include additional layers to toggle between on the initial map

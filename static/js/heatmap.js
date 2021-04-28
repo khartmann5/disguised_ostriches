@@ -172,7 +172,7 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
   console.log(treeCount);
 
   Highcharts.chart('chart1', {
-
+    colors: ["#4b734e"],
     chart: {
       type: 'column'
     },
@@ -207,6 +207,7 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
         borderWidth: 0
       }
     },
+    
     series: [{
       showInLegend: false,
       data: treeCount
@@ -221,11 +222,11 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
     },
 
     title: {
-      text: 'U.S. Census Bureau Data for Portland, 2019'
+      text: 'Portland Median Home Value by Zip Code, 2019'
     },
 
     subtitle: {
-      text: 'Source: census.gov/data'
+      text: 'Source: U.S. Census Bureau'
     },
 
     yAxis: {
@@ -299,11 +300,11 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
     },
 
     title: {
-      text: 'U.S. Census Bureau Data for Portland, 2019'
+      text: 'Portland Median Income by Zip Code, 2019'
     },
 
     subtitle: {
-      text: 'Source: census.gov/data'
+      text: 'Source: U.S. Census Bureau'
     },
 
     yAxis: {
