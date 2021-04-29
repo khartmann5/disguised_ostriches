@@ -232,11 +232,11 @@ map.addLayer(tile);
   // create a function to choose a different color based on median home value
   function chooseColor(home_value) {
     switch (true) {
-      case home_value > 800000: return "#c7ea46";
-      case home_value > 700000: return "#fce205";
-      case home_value > 600000: return "#ffbf00";
-      case home_value > 500000: return "#fda50f";
-      case home_value > 400000: return "#f64a8a";
+      case home_value > 700000: return "#c7ea46";
+      case home_value > 600000: return "#fce205";
+      case home_value > 500000: return "#ffbf00";
+      case home_value > 400000: return "#fda50f";
+      case home_value > 300000: return "#f64a8a";
       case home_value < 300000: return "#b90f0a";
     };
   }
@@ -248,6 +248,7 @@ map.addLayer(tile);
       L.circle([latCensusArray[i], longCensusArray[i]], {
       fillColor: chooseColor(medianHome[i]),
       radius: Math.sqrt(medianHome[i]),
+      fillOpacity: 10,
       stroke: true,
       weight: 0.5,
       color: "black"
