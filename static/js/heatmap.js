@@ -380,7 +380,7 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
 
       fillColor: chooseColor(medianHome[i]),
       radius: Math.sqrt(medianHome[i]),
-      fillOpacity: 10,
+      fillOpacity: .6,
       stroke: true,
       weight: 0.5,
       color: "black"
