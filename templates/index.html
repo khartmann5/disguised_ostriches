@@ -35,76 +35,102 @@
 </head>
 
 <body style="background-color: #2C432E;">
-  <div class="container-fluid" id="pageTitle">
-    <h1>Heritage Trees in Portland</h1>
-    <h4 style="font-size: large; font-weight: lighter;color: black;">Lauren Toothaker | Katie Hartmann | Charlie Loveall
-    </h4>
-  </div>
-  <div class="container" id="overview">
-    <img src="static/images/ortictree.jpg" class="rounded float-start" alt="Heritage Tree Image from OrTIC"
-      style="width: 150px;height:150px;" id="orticimg">
-    <p id="summary">Ever wonder if the designated heritage tree in your neighborhood might be impacting your home value?
-      Are there correlations between heritage tree locations and various demographics? Here you can interact with some
-      visuals to answer some of these questions.</p>
-    <!-- paragraph content below from  https://oregontic.com/oregon-heritage-trees/about-heritage-trees/ (linked in footer)-->
-    <p id="summary">What does it take for a tree to be recognized as an Oregon Heritage Tree? The Travel Information
-      Council
-      researches each tree nomination with a dedicated group of volunteers. Certain criteria such as accessibility to
-      the public, tree health and historic significance all play a role in whether or not a tree or grove qualifies.</p>
-    <p id="summary">Honored groves, single trees or groups of trees have something in common with one another no matter
-      what the
-      species – they are trees that tell a story; trees that confound and astound; trees that educate both Oregonians
-      and visitors about significant people or events from the past; trees that have survived natural disasters or stand
-      as silent sentries to the passage of time. And that’s only a small part of what makes an Oregon Heritage Tree
-      compelling.</p>
+  <div class="bg-image" style="background-image: url('static/images/treesilhouettes.webp');">
+    <div class="container-fluid" id="pageTitle">
+      <h1>Heritage Trees in Portland</h1>
+      <h4 style="font-size: large; font-weight: lighter;color: white;">Lauren Toothaker | Katie Hartmann | Charlie
+        Loveall
+      </h4>
+      <br>
+    </div>
+    <div class="container" id="overview">
+      <img src="static/images/ortictree.jpg" class="rounded float-start" alt="Heritage Tree Image from OrTIC"
+        style="width: 230px;height:230px;" id="orticimg">
+      <p id="summary">Ever wonder if the designated heritage tree in your neighborhood might be impacting your home
+        value?
+        Are there correlations between heritage tree locations and various demographics? Here you can interact with some
+        visuals to answer some of these questions.</p>
+      <!-- paragraph content below from  https://oregontic.com/oregon-heritage-trees/about-heritage-trees/ (linked in footer)-->
+      <p id="summary">What does it take for a tree to be recognized as an Oregon Heritage Tree? The Travel Information
+        Council researches each tree nomination with a dedicated group of volunteers. Certain criteria such as
+        accessibility to
+        the public, tree health and historic significance all play a role in whether or not a tree or grove qualifies.
+      </p>
+      <p id="summary">Honored groves, single trees or groups of trees have something in common with one another no
+        matter
+        what the species – they are trees that tell a story; trees that confound and astound; trees that educate both
+        Oregonians
+        and visitors about significant people or events from the past; trees that have survived natural disasters or
+        stand
+        as silent sentries to the passage of time. And that’s only a small part of what makes an Oregon Heritage Tree
+        compelling.</p><br>
+    </div>
 
-  </div>
-  <!-- The div where we will inject our map -->
-  <div class="container-fluid">
-    <div class="row justify-content-center">
-      <div class="col-lg-12" id="map">
+    <!-- The div where we will inject our leaflet map and highcharts charts -->
+    <div class="container-fluid">
+      <br>
+      <h4 style="text-align: center;">
+        <p>&#8595; Interact with the map below to see designated heritage tree locations and median home values through
+          the city
+          of Portland, OR &#8595;</p>
+      </h4>
+      <div class="row justify-content-center">
+        <div class="col-lg-12" id="map">
+        </div>
+      </div>
+      <div class="row" style="height: 500px;">
+        <div class="col-sm-6" id="chart1">
+        </div>
+        <div class="col-sm-6" id="chart2">
+        </div>
+      </div>
+      <div class="row" style="height: 500px;">
+        <div class="col-sm-6" id="chartdetails">
+          <p><strong>(Top Left)</strong> Heritage Trees Designated by Year shows each year in which a tree was
+            designated
+            as a heritage tree and how many were designated in that year. Years with no designations are not included on
+            the x-axis.</p>
+          <p><strong>(Top Right)</strong> Portland Median Home Value by Zip Code, 2019 shows the median home value in
+            each
+            Portland, OR zip code as reported by the 2019 ACS Census data.</p>
+          <p><strong>(Right)</strong> Portland Median Income by Zip Code, 2019 shows the median income in each Portland,
+            OR zip code as reported by the 2019 ACS Census data.</p>
+        </div>
+        <div class="col-sm-6" id="chart4">
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-sm-6" id="chart1">
-      </div>
-      <div class="col-sm-6" id="chart2">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6" id="chart3">
-      </div>
-      <div class="col-sm-6" id="chart4">
-      </div>
-    </div>
-  </div>
 
-  <!-- d3 JavaScript -->
-  <script type="text/javascript" src="static/js/config.js"></script>
+    <!-- d3 JavaScript -->
+    <script type="text/javascript" src="static/js/config.js"></script>
 
-  <!-- Marker Cluster JS -->
-  <script type="text/javascript"
-    src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
+    <!-- Marker Cluster JS -->
+    <script type="text/javascript"
+      src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
 
-  <!--  JavaScript -->
-  <script type="text/javascript" src="static/js/heatmap.js"></script>
-  <!-- <script type="text/javascript" src="static/js/treedesignations.js"></script> -->
+    <!--  JavaScript -->
+    <script type="text/javascript" src="static/js/heatmap.js"></script>
+    <!-- <script type="text/javascript" src="static/js/treedesignations.js"></script> -->
 
 </body>
 <footer>
   <div class="row" style="font-family: Arial, Helvetica, sans-serif;font-size: medium;">
     <div class="col-sm-9" id="sources">
       <p id="footerlinks">
-        <strong>Sources</strong><br>
+        <strong style="color: white;">Sources</strong><br>
         <a href="https://oregontic.com/oregon-heritage-trees/about-heritage-trees/">Oregon TIC</a><br>
-        <a href="https://gis-pdx.opendata.arcgis.com/datasets/fd1d618ac3174ad5be730524a4dd778e_26/data?geometry=-123.269%2C45.434%2C-121.990%2C45.602">PDX Heritage Trees</a><br>
-        <a href="https://hub.arcgis.com/datasets/9f50a605cf4945259b983fa35c993fe9_125/data?geometry=-123.306%2C45.459%2C-122.028%2C45.627">PDX Neighborhoods</a><br>
+        <a
+          href="https://gis-pdx.opendata.arcgis.com/datasets/fd1d618ac3174ad5be730524a4dd778e_26/data?geometry=-123.269%2C45.434%2C-121.990%2C45.602">PDX
+          Heritage Trees</a><br>
+        <a
+          href="https://hub.arcgis.com/datasets/9f50a605cf4945259b983fa35c993fe9_125/data?geometry=-123.306%2C45.459%2C-122.028%2C45.627">PDX
+          Neighborhoods</a><br>
         <a href="https://www.census.gov/data/developers.html">2019 ACS Census</a>
       <p>
     </div>
     <div class="col-sm-3">
       <p id="footerlinks">
-        <strong>Visit Our GitHub Profiles</strong><br>
+        <strong style="color: white;">Visit Our GitHub Profiles</strong><br>
         <a href="https://github.com/LaurenGT">Lauren Toothaker</a><br>
         <a href="https://github.com/khartmann5">Katie Hartmann</a><br>
         <a href="https://github.com/chuckloveall">Charlie Loveall</a>

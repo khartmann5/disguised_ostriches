@@ -18,7 +18,7 @@ body {
   padding-right: 15px;
 }
 
-p{
+p {
   font-family: Arial, Helvetica, sans-serif;
   color: white
 }
@@ -30,9 +30,18 @@ p{
   padding-left: 15px;
 }
 
-/* #regionmap{
-  height: 400px;
-} */
+.bg-image{
+  background-size: cover;
+  /* min-height: 677px;
+  min-width: 1280px; */
+  /* width: 100%;
+  height: 100%; */
+  /* background-position: 0% 100%; */
+  background-attachment:fixed;
+  /* top: 0;
+  left: 0; */
+  /* background-repeat: no-repeat; */
+}
 
 #map{
     height: 500px;
@@ -51,11 +60,8 @@ p{
   padding-right: 10px;
 }
 
-#chart1 #chart2 #chart3 #chart4{
-  /* height:80%; */
+#chart1 #chart2 #chart4{
   width: 45%;
-  /* padding-left: 30px;
-  padding-right: 50px */
 }
 
 /* CSS from the Leaflet-Choropleth documentation */
@@ -92,6 +98,3 @@ p{
   float: right;
 }
 
-/* h1 {
-  text-align: center;
-} */
