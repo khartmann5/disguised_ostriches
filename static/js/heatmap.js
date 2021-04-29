@@ -207,7 +207,7 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
         borderWidth: 0
       }
     },
-    
+
     series: [{
       showInLegend: false,
       data: treeCount
@@ -236,6 +236,8 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
     },
 
     xAxis: {
+        categories: zip,
+        crosshair: true,
       accessibility: {
         rangeDescription: 'Zipcode'
       }
