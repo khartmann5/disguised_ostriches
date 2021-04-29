@@ -236,14 +236,14 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
     },
 
     xAxis: {
-        categories: zip,
-        crosshair: true,
+      categories: zip,
+      crosshair: true,
       accessibility: {
         rangeDescription: 'Zipcode'
-    },
-    title: {
-      text: 'Zipcode'
-    }
+      },
+      title: {
+        text: 'Zipcode'
+      }
     },
 
     plotOptions: {
@@ -282,103 +282,89 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
       rules: [{
         condition: {
           maxWidth: 500
-        },
-        chartOptions: {
-          legend: {
-            layout: 'horizontal',
-            align: 'center',
-            verticalAlign: 'bottom'
-          }
         }
       }]
-    }
-
-  })
-  Highcharts.chart('chart4', {
-    chart: {
-      type: 'column',
-    },
-
-    title: {
-      text: 'Portland Median Income by Zip Code, 2019'
-    },
-
-    subtitle: {
-      text: 'Source: U.S. Census Bureau'
-    },
-
-    yAxis: {
-      min: 0,
-      title: {
-        text: 'Median Income ($)'
-      }
-    },
-
-    xAxis: {
-      categories: zip,
-      crosshair: true,
-      title: {
-        text: 'Zipcode'
-      }
-    },
-
-
-    tooltip: {
-      headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-      pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-        '<td style="padding:0"><b>${point.y:.1f}</b></td></tr>',
-      footerFormat: '</table>',
-      shared: true,
-      useHTML: true
-    },
-    plotOptions: {
-      column: {
-        pointPadding: 0.2,
-        borderWidth: 0
-      }
-    },
-    series: [{
-      name: 'Median Income',
-      color: 'rgba(223, 83, 83, .5)',
-      data: medianIncome,
-      showInLegend: false
-    }],
-
-    responsive: {
-      rules: [{
-        condition: {
-          maxWidth: 500
-        },
-        chartOptions: {
-          legend: {
-            layout: 'horizontal',
-            align: 'center',
-            verticalAlign: 'bottom'
-          }
-        }
-      }]
-    }
-
-  })
-  // ===========================
-  // Adding Median Income circles to map
-  // create a function to choose a different color based on median home value
-  function chooseColor(home_value) {
-    switch (true) {
-      case home_value > 700000: return "#c7ea46";
-      case home_value > 600000: return "#fce205";
-      case home_value > 500000: return "#ffbf00";
-      case home_value > 400000: return "#fda50f";
-      case home_value > 300000: return "#f64a8a";
-      case home_value < 300000: return "#b90f0a";
-    };
   }
-  // create city circles
-  const value = []
 
-  for (let i = 0; i < medianHome.length; i++) {
-    value.push(
-      L.circle([latCensusArray[i], longCensusArray[i]], {
+  })
+Highcharts.chart('chart4', {
+  chart: {
+    type: 'column',
+  },
+
+  title: {
+    text: 'Portland Median Income by Zip Code, 2019'
+  },
+
+  subtitle: {
+    text: 'Source: U.S. Census Bureau'
+  },
+
+  yAxis: {
+    min: 0,
+    title: {
+      text: 'Median Income ($)'
+    }
+  },
+
+  xAxis: {
+    categories: zip,
+    crosshair: true,
+    title: {
+      text: 'Zipcode'
+    }
+  },
+
+
+  tooltip: {
+    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+      '<td style="padding:0"><b>${point.y:.1f}</b></td></tr>',
+    footerFormat: '</table>',
+    shared: true,
+    useHTML: true
+  },
+  plotOptions: {
+    column: {
+      pointPadding: 0.2,
+      borderWidth: 0
+    }
+  },
+  series: [{
+    name: 'Median Income',
+    color: 'rgba(223, 83, 83, .5)',
+    data: medianIncome,
+    showInLegend: false
+  }],
+
+  responsive: {
+    rules: [{
+      condition: {
+        maxWidth: 500
+      }
+    }]
+  }
+
+})
+// ===========================
+// Adding Median Income circles to map
+// create a function to choose a different color based on median home value
+function chooseColor(home_value) {
+  switch (true) {
+    case home_value > 700000: return "#c7ea46";
+    case home_value > 600000: return "#fce205";
+    case home_value > 500000: return "#ffbf00";
+    case home_value > 400000: return "#fda50f";
+    case home_value > 300000: return "#f64a8a";
+    case home_value < 300000: return "#b90f0a";
+  };
+}
+// create city circles
+const value = []
+
+for (let i = 0; i < medianHome.length; i++) {
+  value.push(
+    L.circle([latCensusArray[i], longCensusArray[i]], {
 
       fillColor: chooseColor(medianHome[i]),
       radius: Math.sqrt(medianHome[i]),
@@ -388,31 +374,31 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
       color: "black"
     }).bindPopup("<h5> Median Home Value: " + medianHome[i] + "</h5>"))
 
-  };
+};
 
 
 
 
-  console.log(value);
-  const homes = L.layerGroup(value);
-  map.addLayer(homes);
-  // Create overlay object to hold our overlay layer
-  const overlayMaps = {
-    "Tree Markers": markers,
-    "Home Values": homes
-  };
+console.log(value);
+const homes = L.layerGroup(value);
+map.addLayer(homes);
+// Create overlay object to hold our overlay layer
+const overlayMaps = {
+  "Tree Markers": markers,
+  "Home Values": homes
+};
 
-  // const map = L.map("map", {
-  //   center: [45.5051, -122.6754],
-  //   zoom: 12,
-  //   layers: [tile, markers, homes]
-  // });
+// const map = L.map("map", {
+//   center: [45.5051, -122.6754],
+//   zoom: 12,
+//   layers: [tile, markers, homes]
+// });
 
-  // create a legend in the bottom right corner (with the help of my tutor David Pecot)
-  var legend = L.control({
-    position: 'bottomright',
-    fillColor: 'white'
-  });
+// create a legend in the bottom right corner (with the help of my tutor David Pecot)
+var legend = L.control({
+  position: 'bottomright',
+  fillColor: 'white'
+});
 
 
 legend.onAdd = function () {
@@ -425,14 +411,14 @@ legend.onAdd = function () {
     div.innerHTML +=
       "<div style='background: " + color[i] + "; text-align: center; padding: 1; border: 1px solid grey; min-width: 80px;'>"
       + grades[i] + (grades[i - 1] ? "&ndash;" + grades[i - 1] + "</div>" : "></div>");
-      // + grades[i] ; "</div>";
+    // + grades[i] ; "</div>";
   }
   return div;
 
 
-  }
+}
 
-  legend.addTo(map)
+legend.addTo(map)
 
-  L.control.layers(baseMaps, overlayMaps, { collapsed: false }).addTo(map);
+L.control.layers(baseMaps, overlayMaps, { collapsed: false }).addTo(map);
 });
