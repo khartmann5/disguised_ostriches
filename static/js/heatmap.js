@@ -274,7 +274,8 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
     series: [{
       name: 'Median Home Value',
       color: 'rgba(223, 83, 83, .5)',
-      data: medianHome
+      data: medianHome,
+      showInLegend: false
     }],
 
     responsive: {
@@ -339,7 +340,8 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
     series: [{
       name: 'Median Income',
       color: 'rgba(223, 83, 83, .5)',
-      data: medianIncome
+      data: medianIncome,
+      showInLegend: false
     }],
 
     responsive: {
