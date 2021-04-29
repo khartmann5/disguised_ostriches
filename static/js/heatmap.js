@@ -252,7 +252,7 @@ map.addLayer(tile);
       stroke: true,
       weight: 0.5,
       color: "black"
-    }))
+    }).bindPopup("<h5> Median Home Value: " + medianHome[i] + "</h5>"))
   };
 
   
@@ -281,14 +281,15 @@ var legend = L.control({
 
 legend.onAdd = function () {
   var div = L.DomUtil.create("div", "info legend");
-  var grades = [800000, 700000, 600000, 500000, 400000, 300000];
+  var grades = [700000, 600000, 500000, 400000, 300000, 200000];
   var color = ['#c7ea46', '#fce205', '#ffbf00', '#fda50f', '#f64a8a', '#b90f0a'];
 
   div.innerHTML += "<div style='font-weight: 600; text-align:center;'>Home Value</div>";
   for (var i = 0; i < grades.length; i++) {
     div.innerHTML +=
       "<div style='background: " + color[i] + "; text-align: center; padding: 1; border: 1px solid grey; min-width: 80px;'>"
-      + grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "</div>" : "<</div>");
+      + grades[i] + (grades[i - 1] ? "&ndash;" + grades[i - 1] + "</div>" : "></div>");
+      // + grades[i] ; "</div>";
   }
   return div;
 
