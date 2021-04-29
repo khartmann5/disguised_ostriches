@@ -240,13 +240,10 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
         crosshair: true,
       accessibility: {
         rangeDescription: 'Zipcode'
-      }
     },
-
-    legend: {
-      layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'middle'
+    title: {
+      text: 'Zipcode'
+    }
     },
 
     plotOptions: {
@@ -319,13 +316,11 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
     xAxis: {
       categories: zip,
       crosshair: true,
+      title: {
+        text: 'Zipcode'
+      }
     },
 
-    legend: {
-      layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'middle'
-    },
 
     tooltip: {
       headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
