@@ -82,7 +82,7 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
       return {
         color: "white",
         fillColor: "lightblue",
-        // fillOpacity: 0.1,
+        fillOpacity: 0.5,
         weight: 1.5
       };
     },
@@ -368,11 +368,11 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
   // create a function to choose a different color based on median home value
   function chooseColor(home_value) {
     switch (true) {
-      case home_value > 800000: return "#c7ea46";
-      case home_value > 700000: return "#fce205";
-      case home_value > 600000: return "#ffbf00";
-      case home_value > 500000: return "#fda50f";
-      case home_value > 400000: return "#f64a8a";
+      case home_value > 700000: return "#c7ea46";
+      case home_value > 600000: return "#fce205";
+      case home_value > 500000: return "#ffbf00";
+      case home_value > 400000: return "#fda50f";
+      case home_value > 300000: return "#f64a8a";
       case home_value < 300000: return "#b90f0a";
     };
   }
@@ -382,12 +382,15 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
   for (let i = 0; i < medianHome.length; i++) {
     value.push(
       L.circle([latCensusArray[i], longCensusArray[i]], {
-        fillColor: chooseColor(medianHome[i]),
-        radius: Math.sqrt(medianHome[i]),
-        stroke: true,
-        weight: 0.5,
-        color: "black"
-      }))
+
+      fillColor: chooseColor(medianHome[i]),
+      radius: Math.sqrt(medianHome[i]),
+      fillOpacity: 10,
+      stroke: true,
+      weight: 0.5,
+      color: "black"
+    }).bindPopup("<h5> Median Home Value: " + medianHome[i] + "</h5>"))
+
   };
 
 
@@ -414,18 +417,21 @@ Promise.all([d3.json(neighborhoodURL), d3.json(treesURL), d3.json(census)]).then
     fillColor: 'white'
   });
 
-  legend.onAdd = function () {
-    var div = L.DomUtil.create("div", "info legend");
-    var grades = [800000, 700000, 600000, 500000, 400000, 300000];
-    var color = ['#c7ea46', '#fce205', '#ffbf00', '#fda50f', '#f64a8a', '#b90f0a'];
 
-    div.innerHTML += "<div style='font-weight: 600; text-align:center;'>Home Value</div>";
-    for (var i = 0; i < grades.length; i++) {
-      div.innerHTML +=
-        "<div style='background: " + color[i] + "; text-align: center; padding: 1; border: 1px solid grey; min-width: 80px;'>"
-        + grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "</div>" : "<</div>");
-    }
-    return div;
+legend.onAdd = function () {
+  var div = L.DomUtil.create("div", "info legend");
+  var grades = [700000, 600000, 500000, 400000, 300000, 200000];
+  var color = ['#c7ea46', '#fce205', '#ffbf00', '#fda50f', '#f64a8a', '#b90f0a'];
+
+  div.innerHTML += "<div style='font-weight: 600; text-align:center;'>Home Value</div>";
+  for (var i = 0; i < grades.length; i++) {
+    div.innerHTML +=
+      "<div style='background: " + color[i] + "; text-align: center; padding: 1; border: 1px solid grey; min-width: 80px;'>"
+      + grades[i] + (grades[i - 1] ? "&ndash;" + grades[i - 1] + "</div>" : "></div>");
+      // + grades[i] ; "</div>";
+  }
+  return div;
+
 
   }
 
