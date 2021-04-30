@@ -3,7 +3,10 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Tree Data</title>
+  <title>PDX Heritage Trees</title>
+  <!-- icon from google with creative commons license -->
+  <link rel="shortcut icon" href="static/images/favicon.ico">
+  
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -44,6 +47,7 @@
       <br>
     </div>
     <div class="container" id="overview">
+      <!-- background image from google with creative commons license -->
       <img src="static/images/ortictree.jpg" class="rounded float-start" alt="Heritage Tree Image from OrTIC"
         style="width: 230px;height:230px;" id="orticimg">
       <p id="summary">Ever wonder if the designated heritage tree in your neighborhood might be impacting your home
@@ -75,12 +79,15 @@
           of Portland, OR &#8595;</p>
       </h4>
       <div class="row justify-content-center">
+        <!-- insert leaflet map here -->
         <div class="col-lg-12" id="map">
         </div>
       </div>
       <div class="row" style="height: 500px;">
+        <!-- insert heritage tree highchart -->
         <div class="col-sm-6" id="chart1">
         </div>
+        <!-- insert first census highchart -->
         <div class="col-sm-6" id="chart2">
         </div>
       </div>
@@ -96,6 +103,7 @@
           <p><strong>(Right)</strong> Portland Median Income by Zip Code, 2019 shows the median income in each Portland,
             OR zip code as reported by the 2019 ACS Census data.</p>
         </div>
+        <!-- insert second census highchart -->
         <div class="col-sm-6" id="chart4">
         </div>
       </div>
@@ -110,7 +118,6 @@
 
     <!--  JavaScript -->
     <script type="text/javascript" src="static/js/heatmap.js"></script>
-    <!-- <script type="text/javascript" src="static/js/treedesignations.js"></script> -->
 
 </body>
 <footer>
@@ -125,7 +132,7 @@
         <a
           href="https://hub.arcgis.com/datasets/9f50a605cf4945259b983fa35c993fe9_125/data?geometry=-123.306%2C45.459%2C-122.028%2C45.627">PDX
           Neighborhoods</a><br>
-        <a href="https://www.census.gov/data/developers.html">2019 ACS Census</a>
+        <a href="https://www.census.gov/data/developers.html">2019 ACS Census (U.S.Census Bureau)</a>
       <p>
     </div>
     <div class="col-sm-3">
